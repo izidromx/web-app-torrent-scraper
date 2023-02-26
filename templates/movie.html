@@ -30,23 +30,18 @@
 
 <div class="container my-5">
     <div class="row">
-        {% for movie in movies %}
-            <div class="col-md-3 mb-3">
-                <div class="card">
-                    {% if movie['Poster'] == "N/A" %}
-                        No Movie Poster
-                    {% else %}
-                        <img src="{{ movie['Poster'] }}" class="card-img-top" alt="{{ movie['Title'] }}">
-                    {% endif %}
-                    <div class="card-body">
-                        <h5 class="card-title text-truncate">{{ movie['Title'] }}</h5>
-                        <div class="d-flex justify-content-between mb-3"><span
-                                class="p-2 bg-danger text-white d-block">{{ movie['Type'] }}</span><span class="p-2 bg-warning text-dark d-block">{{ movie['Year'] }}</span></div>
-                        <a href="{{ url_for('get_movie', single_title=movie['Title']) }}" class="btn btn-primary d-block rounded-0">View Movie</a>
-                    </div>
-                </div>
-            </div>
-        {% endfor %}
+        <div class="col">
+            <img src="{{ movie_data['Poster'] }}" alt="">
+            <p id="main-title">{{ movie_data['Title'] }}</p>
+            <form method="post">
+                <input type="hidden" name="scrape-title" value="{{ movie_data['Title'] }} cinecalidad">
+                <button type="submit">Buscar enlaces</button>
+            </form>
+            <h1>Enlaces generados</h1>
+           {% for stream_link, movie_info in stream_movie_info %}
+               <a href="{{ stream_link }}" class="d-block">{{ movie_info['title'] }}</a>
+           {% endfor %}
+        </div>
     </div>
 </div>
 
@@ -56,6 +51,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
         integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
         crossorigin="anonymous"></script>
+
+<script>
+
+</script>
 
 </body>
 </html>
